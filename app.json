@@ -1,0 +1,7 @@
+{
+    "name":"OpenSponsorship Test App",
+    "description": "Test app",
+    "repository":"https://github.com/phreakradio/opensponsorship",
+    "logo":"https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+    "image":"heroku/nodejs"
+}

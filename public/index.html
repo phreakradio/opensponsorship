@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!-- Angular Module -->
+<html ng-app="opensponsorship" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta ng-model="formData.viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenSponsorShip</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="core.js"></script>
+    
+</head>
+
+<body ng-controller="mainController">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <div class="row" id="athleteForm">
+                <form>
+                    <label for="form1">Tell us who you are</label>
+                    <div class="form-group" id="form1">
+                        <input type="text" class="form-control" ng-model="formData.name"     placeholder="Name"><br>
+                        <input type="text" class="form-control" ng-model="formData.dob"      placeholder="Date of Birth"><br>
+                        <input type="text" class="form-control" ng-model="formData.gender"   placeholder="Gender"><br>
+                        <input type="text" class="form-control" ng-model="formData.nation"   placeholder="Nationality"><br>
+                        <input type="text" class="form-control" ng-model="formData.loc"      placeholder="Location"><br>
+                        <button type="button" class="btn btn-primary btn-lg">Next</button>
+                    </div>
+        
+                    <div class="form-group" id="form2">
+                        <input type="text" ng-model="formData.assoc"     placeholder="Association"><br>
+                        <input type="text" ng-model="formData.team"      placeholder="Team"><br>
+                        <input type="text" ng-model="formData.sports"    placeholder="Sports"><br>
+                        <button type="button" class="btn btn-primary btn-lg">Next</button>
+                    </div>
+
+                    <div class="form-group" id="form3">
+                        <input type="text" ng-model="formData.about"     placeholder="About"><br>
+                        <input type="text" ng-model="formData.interest"  placeholder="Interests"><br>
+                        
+                        <input type="text" ng-model="formData.name" placeholder="Social Media Handles"><br>
+                        
+                        <input type="text" ng-model="formData.pets"      placeholder="Pets"><br>
+                        <input type="text" ng-model="formData.alcohol"   placeholder="Drinks Alcohol"><br>
+                        <input type="text" ng-model="formData.married"   placeholder="Married"><br>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createAthlete()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
