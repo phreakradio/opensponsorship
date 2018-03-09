@@ -7,47 +7,136 @@
     <meta ng-model="formData.viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenSponsorShip</title>
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="core.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/animate.css">
     
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="core.js"></script>
+
+    <script>
+        $(function(){
+            $('#timepicker1').datetimepicker();
+        });
+    </script>
 </head>
 
 <body ng-controller="mainController">
-    <div class="container">
-        <div class="jumbotron text-center">
-            <div class="row" id="athleteForm">
+    <nav class="navbar navbar-inverse">
+        <span class="navbar-brand mb-0 h1">OpenSponsorShip Test App</span>
+    </nav>
+
+    <div class="container">                                                                                                         <!--Bootstrap container-->
+        <div class="row" id="athleteForm">                                                                                          <!--Doing one row only-->
+            <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">                                                         <!--Setting width to half screen size-->
+
+                <!--FORM-->
+                <!--    
+                        I'm diving the form into 3 parts. Each form will be accessed when user
+                        enters valid info and will animate to next section
+                -->
                 <form>
-                    <label for="form1">Tell us who you are</label>
-                    <div class="form-group" id="form1">
-                        <input type="text" class="form-control" ng-model="formData.name"     placeholder="Name"><br>
-                        <input type="text" class="form-control" ng-model="formData.dob"      placeholder="Date of Birth"><br>
-                        <input type="text" class="form-control" ng-model="formData.gender"   placeholder="Gender"><br>
-                        <input type="text" class="form-control" ng-model="formData.nation"   placeholder="Nationality"><br>
-                        <input type="text" class="form-control" ng-model="formData.loc"      placeholder="Location"><br>
-                        <button type="button" class="btn btn-primary btn-lg">Next</button>
-                    </div>
-        
-                    <div class="form-group" id="form2">
-                        <input type="text" ng-model="formData.assoc"     placeholder="Association"><br>
-                        <input type="text" ng-model="formData.team"      placeholder="Team"><br>
-                        <input type="text" ng-model="formData.sports"    placeholder="Sports"><br>
-                        <button type="button" class="btn btn-primary btn-lg">Next</button>
+                    <!-- SECTION 1 -->
+                    <div class="form1 currForm">
+                        <label for="form1">Tell us who you are</label>
+                        <div class="form-group" id="form1">
+                            <input type="text" class="form-control" ng-model="formData.name"    placeholder="Name"          required><br>
+                            
+                            <div class="input-group date" id="timepicker1">
+                                <input type="text" class="form-control" ng-model="formData.dob"     placeholder="Date of Birth" required>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div><br>
+                            
+                            
+                            <input type="text" class="form-control" ng-model="formData.gender"  placeholder="Gender"        required><br>
+
+                            <select class="form-control"            ng-model="formData.nation"  required>
+                                <option value="">Select nationality</option>
+                                <option ng-repeat="country in countries" value="{{country}}">{{country}}</option>
+                            </select><br>
+
+                            <select class="form-control"            ng-model="formData.loc"     required>
+                                <option value="">Select current location</option>
+                                <option ng-repeat="country in countries" value="{{country}}">{{country}}</option>
+                            </select><br>
+
+                            <button type="button" class="btn btn-primary btn-lg nexts">Next</button>
+                        </div>
                     </div>
 
-                    <div class="form-group" id="form3">
-                        <input type="text" ng-model="formData.about"     placeholder="About"><br>
-                        <input type="text" ng-model="formData.interest"  placeholder="Interests"><br>
-                        
-                        <input type="text" ng-model="formData.name" placeholder="Social Media Handles"><br>
-                        
-                        <input type="text" ng-model="formData.pets"      placeholder="Pets"><br>
-                        <input type="text" ng-model="formData.alcohol"   placeholder="Drinks Alcohol"><br>
-                        <input type="text" ng-model="formData.married"   placeholder="Married"><br>
-                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createAthlete()">Submit</button>
+                    <!-- SECTION 2 -->
+                    <div class="form2 hidden">
+                        <label for="form2">Tell us who you play for</label>
+                        <div class="form-group" id="form2">
+                            <input type="text" class="form-control" ng-model="formData.assoc"     placeholder="Association"><br>
+                            <input type="text" class="form-control" ng-model="formData.team"      placeholder="Team"><br>
+                            <input type="text" class="form-control" ng-model="formData.sports"    ng-options="name for item in sports" placeholder="Sports"><br>
+
+                            <button type="button" class="btn btn-lg prevs"            >Prev</button>
+                            <button type="button" class="btn btn-primary btn-lg nexts">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3 -->
+                    <div class="form3 hidden">
+                        <label for="form3">Tell us about youself</label>
+                        <div class="form-group" id="form3">
+                            <textarea rows="3"              type="text" class="form-control" ng-model="formData.about"    placeholder="About"></textarea><br>
+                            <input data-role="tagsinput"    type="text" class="form-control" ng-model="formData.interest" placeholder="Interests"><br>
+                            <input data-role="tagsinput"    type="text" class="form-control" ng-model="formData.charities" placeholder="Charities"><br>
+
+                            <input type="text"  ng-model="formData.name" placeholder="Social Media Handles"><br>
+
+                            <input type="text"  class="form-control" ng-model="formData.pets"      placeholder="Pets"><br>
+                            <input type="radio" class="form-control" ng-model="formData.alcohol">Drink Alcohol?<br>
+                            <input type="radio" class="form-control" ng-model="formData.married">Married?<br>
+
+                            <button type="button" class="btn btn-lg prevs">Prev</button>
+                            <button type="submit" class="btn btn-primary btn-lg" ng-click="createAthlete()" id="subBut">Submit</button>
+                        </div>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>
 </body>
+<!-- Latest compiled and minified JavaScript -->
+    <script>
+        //By default we start with first form
+        var currForm;
+
+        $('.nexts').click(function(){
+            currForm = $(".currForm");
+            nextForm = currForm.next();
+
+            //Add animations for exit and turn off entry animations
+            currForm.toggleClass('currForm slideInRight slideOutLeft');
+
+            //Animations done, timeout after 2s removes animation classes
+            setTimeout(currForm.toggleClass('animate slideOutLeft hidden'),2000);
+
+            //Add animations to next panel, unhide it, and set as current
+            nextForm.toggleClass('animate slideInRight hidden currForm');
+
+        });
+
+        $('.prevs').click(function(){
+    //        currForm = $(".currForm");
+    //        prevForm = currForm.prev();
+    //        
+    //        currForm.toggleClass('animated slideInRight').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
+    //        if(prevForm.hasClass('slideOutLeft'))
+    //            prevForm.toggleClass('animated slideInLeft').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
+    //        else
+    //            prevForm.toggleClass('animated slideInRight').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
+        });
+    </script>
 </html>

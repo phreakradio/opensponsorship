@@ -9,6 +9,7 @@ module.exports = mongoose.model('Athlete',{
     team:           String,
     isMale:         Boolean,
     sports:         [String],
+    about:          String,
     interests:      [String],
     charities:      [String],
     socialMedia:    {
