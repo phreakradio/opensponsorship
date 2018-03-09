@@ -30,6 +30,9 @@ function mainController($scope, $http){
 
     //Data from form will go here
     $scope.createAthlete = function(){
+        
+        console.log("DEBUG::CREATING ATHLETE");
+        
         $http.post('/createAthlete', $scope.formData)
             .success(function(data){
                 $scope.formData = {}; //clear form
@@ -40,6 +43,4 @@ function mainController($scope, $http){
                 console.log('ERROR:: FAILED CREATING '+data);
             })
     };
-    
-    
 }

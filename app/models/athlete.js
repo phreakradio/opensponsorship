@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Athlete',{
+    dateCreated:    {type:Date, default:Date.now},
     name:           String,
     dob:            Date,
     nationality:    String,
@@ -20,7 +21,6 @@ module.exports = mongoose.model('Athlete',{
         twitch      :{handle:String},
         snap        :{handle:String}
     },
-    pets:           [String],
-    alcohol:        Boolean,
-    married:        Boolean
+    alcohol:        {type:Boolean, default:false},
+    married:        {type:Boolean, default:false}
 });

@@ -3,20 +3,23 @@ var Athlete = require('./models/athlete');
 
 
 module.exports = function(app){
-    
+    //Get list of sports
     app.get('/sports', function(req,res){
         var sports = require('./data/sports.json');
-//        console.log("DEBUG:: COUNTRIES" + sports.data);
         res.send(sports.data);
     });
     
+    //Get list of countries
     app.get('/countries', function(req, res){
         var countries = require('./data/countries.json');
-//        console.log("DEBUG:: COUNTRIES" + countries.data);
         res.send(countries.data);
     });
     
+    //Create athlete profile
     app.post('/createAthlete', function(req, res){
+        
+        console.log("DEBUG::" + req.body);
+        
         Athlete.create({
             name:           req.body.name,
             dob:            req.body.dob,
@@ -25,10 +28,10 @@ module.exports = function(app){
             location:       req.body.loc,
             association:    req.body.assoc,
             team:           req.body.team,
-            sports:         req.body.sports.split(' '),
+            sports:         req.body.sports.split(','),
             about:          req.body.about,
-            interests:      req.body.interest.split(' '),
-            charities:      req.body.interest.split(' '),
+            interests:      req.body.interest.split(','),
+            charities:      req.body.charities.split(','),
             socialMedia:    {
                 facebook    :req.body.facebook,
                 twitter     :req.body.twitter,
@@ -36,13 +39,16 @@ module.exports = function(app){
                 youtube     :req.body.youtube,
                 twitch      :req.body.twitch,
                 snap        :req.body.snap
-            },
-            pets:           req.body.pets.split(' '),
+            },  
             alcohol:        req.body.alcohol,
             married:        req.body.married
         },function(err,athlete){
-            if(err)
+            if(err){
                 res.send(err);
+                console.log("ERROR:: ATHLETE FAILED CREATE IN ROUTES " + err);
+            }
+            
+            //Athelete created, get all of them now
             Athlete.find(function(err,athletes){
                 if(err)
                     res.send(err);

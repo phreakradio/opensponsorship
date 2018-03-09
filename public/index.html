@@ -7,23 +7,27 @@
     <meta ng-model="formData.viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenSponsorShip</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <!-- Bootstrap      --><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Datepicker     --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
+    <!-- Tagmanager     --><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
+    <!-- fontawesome    --><link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+    <!-- animate.css    --><link rel="stylesheet" href="css/animate.css">
     
+    <!-- jQuery         --><script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- moment.js      --><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <!-- Bootstrap      --><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Angular        --><script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <!-- Datepicker     --><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <!-- Tagmanager     --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
+    <!-- typeahead/Bloodhound--><script type="text/javascript" src="js/typeahead.bundle.js"></script>
     
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="core.js"></script>
-
-    <script>
-        $(function(){
-            $('#timepicker1').datetimepicker();
-        });
-    </script>
+    <!-- Controller     --><script src="core.js"></script>
+    
+    <style>
+        html{
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body ng-controller="mainController">
@@ -31,38 +35,36 @@
         <span class="navbar-brand mb-0 h1">OpenSponsorShip Test App</span>
     </nav>
 
-    <div class="container">                                                                                                         <!--Bootstrap container-->
-        <div class="row" id="athleteForm">                                                                                          <!--Doing one row only-->
-            <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">                                                         <!--Setting width to half screen size-->
+    <div class="container">                                                 <!--Bootstrap container-->
+        <div class="row" id="athleteForm">                                  
+            <div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3"> <!--Setting width to half screen size-->
 
                 <!--FORM-->
-                <!--    
-                        I'm diving the form into 3 parts. Each form will be accessed when user
-                        enters valid info and will animate to next section
-                -->
-                <form>
+                <form ng-submit="createAthlete()">
                     <!-- SECTION 1 -->
-                    <div class="form1 currForm">
+                    <div class="form1 animated slideInRight currForm">
                         <label for="form1">Tell us who you are</label>
                         <div class="form-group" id="form1">
-                            <input type="text" class="form-control" ng-model="formData.name"    placeholder="Name"          required><br>
+    <!--  Name           --><input type="text" class="form-control" ng-model="formData.name"    placeholder="Name"          required><br>
                             
-                            <div class="input-group date" id="timepicker1">
-                                <input type="text" class="form-control" ng-model="formData.dob"     placeholder="Date of Birth" required>
+    <!--  DOB            --><div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control" data-provide="datepicker" ng-model="formData.dob"     placeholder="Date of Birth" required>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div><br>
                             
+    <!--  Gender         --><center>
+                            <input type="radio" value="true"  ng-model="formData.gender">Male
+                            <input type="radio" value="false" ng-model="formData.gender">Female<br>
+                            </center>
                             
-                            <input type="text" class="form-control" ng-model="formData.gender"  placeholder="Gender"        required><br>
-
-                            <select class="form-control"            ng-model="formData.nation"  required>
+    <!--  Nationality    --><select class="form-control"            ng-model="formData.nation">
                                 <option value="">Select nationality</option>
                                 <option ng-repeat="country in countries" value="{{country}}">{{country}}</option>
                             </select><br>
 
-                            <select class="form-control"            ng-model="formData.loc"     required>
+    <!--  CurrLoc        --><select class="form-control"            ng-model="formData.loc">
                                 <option value="">Select current location</option>
                                 <option ng-repeat="country in countries" value="{{country}}">{{country}}</option>
                             </select><br>
@@ -75,11 +77,13 @@
                     <div class="form2 hidden">
                         <label for="form2">Tell us who you play for</label>
                         <div class="form-group" id="form2">
-                            <input type="text" class="form-control" ng-model="formData.assoc"     placeholder="Association"><br>
-                            <input type="text" class="form-control" ng-model="formData.team"      placeholder="Team"><br>
-                            <input type="text" class="form-control" ng-model="formData.sports"    ng-options="name for item in sports" placeholder="Sports"><br>
-
-                            <button type="button" class="btn btn-lg prevs"            >Prev</button>
+    <!--  Association    --><input type="text" class="form-control" ng-model="formData.assoc"     placeholder="Association"><br>
+    
+    <!--  Team           --><input type="text" class="form-control" ng-model="formData.team"      placeholder="Team"><br>
+    
+    <!--  Sports         --><input type="text" placeholder="Sports..." class="form-control tm-input tm-input-typeahead form-control tm-input-info tm-sports" ng-model="formData.sports"/><br>
+    
+<!--                            <button type="button" class="btn btn-lg prevs"            >Prev</button>-->
                             <button type="button" class="btn btn-primary btn-lg nexts">Next</button>
                         </div>
                     </div>
@@ -88,55 +92,108 @@
                     <div class="form3 hidden">
                         <label for="form3">Tell us about youself</label>
                         <div class="form-group" id="form3">
-                            <textarea rows="3"              type="text" class="form-control" ng-model="formData.about"    placeholder="About"></textarea><br>
-                            <input data-role="tagsinput"    type="text" class="form-control" ng-model="formData.interest" placeholder="Interests"><br>
-                            <input data-role="tagsinput"    type="text" class="form-control" ng-model="formData.charities" placeholder="Charities"><br>
+    <!--  About          --><textarea rows="3"              type="text" class="form-control" ng-model="formData.about"    placeholder="About"></textarea><br>
+    
+    <!--  Interests      --><input type="text" placeholder="Interests..." class="form-control tm-input tm-input-typeahead form-control tm-input-info tm-interests" ng-model="formData.interest"/><br>
+    
+    <!--  Charities      --><input type="text" placeholder="Charities..." class="form-control tm-input tm-input-typeahead form-control tm-input-info tm-charities" ng-model="formData.charities"/><br>
+                            
+    <!--  SocialMedia    --><h3><span class="label label-default">Social Media Handles</span></h3>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3"><i class="fab fa-facebook fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.facebook" placeholder="Facebook">
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3" ><i class="fab fa-twitter fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.twitter" placeholder="Twitter">
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3"><i class="fab fa-instagram fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.insta" placeholder="Instagram">
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3"><i class="fab fa-youtube fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.youtube" placeholder="Youtube">
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3"><i class="fab fa-snapchat fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.snap" placeholder="Snapchat">
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3"><i class="fab fa-twitch fa-lg"></i></span>
+                                <input type="text" class="form-control" ng-model="formData.twitch" placeholder="Twitch">
+                            </div><br>
 
-                            <input type="text"  ng-model="formData.name" placeholder="Social Media Handles"><br>
+    <!--  Alcohol        --><input type="radio" ng-model="formData.alcohol">Drink Alcohol?<br>
+    
+    <!--  Married        --><input type="radio" ng-model="formData.married">Married?<br>
 
-                            <input type="text"  class="form-control" ng-model="formData.pets"      placeholder="Pets"><br>
-                            <input type="radio" class="form-control" ng-model="formData.alcohol">Drink Alcohol?<br>
-                            <input type="radio" class="form-control" ng-model="formData.married">Married?<br>
-
-                            <button type="button" class="btn btn-lg prevs">Prev</button>
-                            <button type="submit" class="btn btn-primary btn-lg" ng-click="createAthlete()" id="subBut">Submit</button>
+<!--                            <button type="button" class="btn btn-lg prevs">Prev</button>-->
+                            <button type="submit" class="btn btn-primary btn-lg" id="subBut" onclick="displayResults()">Submit</button>
                         </div>
                     </div>
                 </form>
+
+                <div id="results" class="hidden">
+                    <div ng-repeat="athelete in atheletes" class="profile"  >
+                        {{athelete.name}}
+                        {{athelete.dob}}
+                    </div>
+                </div>
                 
             </div>
         </div>
     </div>
 </body>
-<!-- Latest compiled and minified JavaScript -->
     <script>
+        window.onload = function(){
+            var sports = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: $('[ng-controller="mainController"]').scope().sports,
+            });
+            
+            sports.initialize();
+            
+            var tagApi = $(".tm-input.tm-input-typeahead").tagsManager();
+            $(".tm-input.tm-input-typeahead.tm-sports").typeahead({
+                highlight:true,
+                hint:true
+            },{
+                source:sports
+            }).on('typeahead:selected',function(e,d){
+                tagApi.tagsManager("pushTag", d.name);
+            });
+        };
+        
+        $(document).on("keypress", 'form', function (e) {
+            var code = e.keyCode || e.which;
+            if (code == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
         //By default we start with first form
         var currForm;
+        var index = 1;
 
         $('.nexts').click(function(){
             currForm = $(".currForm");
-            nextForm = currForm.next();
-
-            //Add animations for exit and turn off entry animations
-            currForm.toggleClass('currForm slideInRight slideOutLeft');
-
-            //Animations done, timeout after 2s removes animation classes
-            setTimeout(currForm.toggleClass('animate slideOutLeft hidden'),2000);
+            nextForm = $('.form'+(++index));
 
             //Add animations to next panel, unhide it, and set as current
-            nextForm.toggleClass('animate slideInRight hidden currForm');
-
+            nextForm.toggleClass('animated slideInRight hidden');
+            
+            currForm.toggleClass('currForm');
+            nextForm.toggleClass('currForm');
+            
+            $(this).toggleClass('hidden');
         });
-
-        $('.prevs').click(function(){
-    //        currForm = $(".currForm");
-    //        prevForm = currForm.prev();
-    //        
-    //        currForm.toggleClass('animated slideInRight').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
-    //        if(prevForm.hasClass('slideOutLeft'))
-    //            prevForm.toggleClass('animated slideInLeft').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
-    //        else
-    //            prevForm.toggleClass('animated slideInRight').toggleClass('animated slideOutLeft').toggleClass('hidden').toggleClass('currForm');
-        });
+        
+        function displayResults(){
+            $('form').toggleClass('hidden');
+            $('#results').toggleClass('hidden');
+        }
     </script>
 </html>
